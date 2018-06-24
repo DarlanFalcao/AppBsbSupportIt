@@ -75,4 +75,26 @@ public class Funcionario {
 		this.password = password;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (idFunc ^ (idFunc >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Funcionario other = (Funcionario) obj;
+		if (idFunc != other.idFunc)
+			return false;
+		return true;
+	}
+
 }

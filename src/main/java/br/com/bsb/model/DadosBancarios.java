@@ -113,6 +113,36 @@ public class DadosBancarios {
 	public void setBanco(String banco) {
 		this.banco = banco;
 	}
+
+
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (idConta ^ (idConta >>> 32));
+		return result;
+	}
+
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DadosBancarios other = (DadosBancarios) obj;
+		if (idConta != other.idConta)
+			return false;
+		return true;
+	}
 	
 	
 	

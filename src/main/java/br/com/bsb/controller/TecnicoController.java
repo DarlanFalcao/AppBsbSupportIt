@@ -1,7 +1,6 @@
 package br.com.bsb.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.bsb.model.DadosBancarios;
 import br.com.bsb.model.Endereco;
+import br.com.bsb.model.Rat;
 import br.com.bsb.model.Tecnico;
 import br.com.bsb.model.Telefone;
 import br.com.bsb.repository.DadosBancariosRepository;
 import br.com.bsb.repository.EnderecoRepository;
+import br.com.bsb.repository.RatRepository;
 import br.com.bsb.repository.TecnicoRepository;
 import br.com.bsb.repository.TelefoneRepository;
 
@@ -39,6 +40,9 @@ public class TecnicoController {
 	@Autowired
 	private DadosBancariosRepository dadosRep;
 
+	@Autowired
+	private RatRepository ratRep;
+	
 	@GetMapping("/cadastroTecnico")
 	public String chamarCadastroTecnico(Model model) {
 		Tecnico tecnico = new Tecnico();
@@ -59,8 +63,8 @@ public class TecnicoController {
 	}
 
 	@PostMapping("/salvarTecnico")
-	public String newTecnico(   @ModelAttribute("tecnico") Tecnico tecnico,
-			RedirectAttributes red,BindingResult result, Model model) {
+	public String newTecnico(@ModelAttribute("tecnico") Tecnico tecnico,
+			BindingResult result, Model model,RedirectAttributes red) {
 		
 		
 		System.out.println(result);
@@ -84,9 +88,9 @@ public class TecnicoController {
 		}
 		tecnico.setBloqueado(false);
 		tecRepository.save(tecnico);
-		red.addFlashAttribute("message", "Success");
-	    red.addFlashAttribute("alertClass", "alert-success");
-		return "redirect:/listarTecnicos";
+		red.addFlashAttribute("message", "Técnico salvo com sucesso!");
+	   
+		return "redirect:/cadastroTecnico";
 	}
 	@GetMapping("/listarTecnicos")
 	public String listarTodos(Model model){
@@ -94,7 +98,7 @@ public class TecnicoController {
 		return "/listarTecnico" ;
 	}
   
-	@GetMapping("/{idTecnico}")
+	@GetMapping("editTecnico/{idTecnico}")
 	public String editarTecnico(@PathVariable("idTecnico")Long id,Model model) {
 		model.addAttribute("tecnico", tecRepository.findById(id).get());
 		return "/editarTecnico";
@@ -142,8 +146,12 @@ public class TecnicoController {
 		System.out.println("ERROR: "+result);
 		Optional<Tecnico> tecnicoProcurado = tecRepository.findById(id);
 		if(tecnicoProcurado != null) {
-			
+			if(tecnicoProcurado.get().isBloqueado()) {
+				tecnicoProcurado.get().setBloqueado(false);
+					
+			}else {
 			tecnicoProcurado.get().setBloqueado(true);
+			}
 			tecRepository.save(tecnicoProcurado.get());
 			return "redirect:/listarTecnicos";
 		}
@@ -151,5 +159,16 @@ public class TecnicoController {
 		return "redirect:/listarTecnicos";
  
 	}
+	@GetMapping("/listarRatTecnico/{idTecnico}")
+	public String listarRatTecnico(@PathVariable("idTecnico")Long id,@ModelAttribute Rat rat,BindingResult result,Model model) {
+		
+	
+		model.addAttribute("rats",ratRep.findByTecnico(tecRepository.findById(id).get()));
+		model.addAttribute("tecnico",tecRepository.findById(id).get());
+
+		return "/listarRatPorTecnico";
+	}
+	
+	
 	
 }

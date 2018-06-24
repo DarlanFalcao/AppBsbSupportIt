@@ -1,6 +1,7 @@
 package br.com.bsb.model;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,11 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
@@ -26,6 +28,7 @@ public class Rat {
 	@Column
 	private String numOtrs;
 	@Column
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dataChamado;
 	@Column
 	private Date dataHoraInicio;
@@ -39,7 +42,7 @@ public class Rat {
 	private String motivoChamado;
 	@Column
 	private String descricaoDoAtendimento;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	private Tecnico tecnico;
 	@OneToOne
 	private Cliente cliente;
@@ -48,7 +51,7 @@ public class Rat {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private Endereco endereco;
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="id_material" )
+	@OneToMany(mappedBy="id_material" )
 	private List<Material> materiais;
 	@Column
 	private String status;
@@ -56,7 +59,7 @@ public class Rat {
 	private boolean validado;
 	@OneToOne
 	private Funcionario funcValidou;
-	
+	@Column
 	private double valor;
 	
 	public long getIdRat() {
@@ -167,6 +170,26 @@ public class Rat {
 	}
 	public void setValor(double valor) {
 		this.valor = valor;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (idRat ^ (idRat >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rat other = (Rat) obj;
+		if (idRat != other.idRat)
+			return false;
+		return true;
 	}
 	
 	

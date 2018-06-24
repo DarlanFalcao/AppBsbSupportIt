@@ -56,6 +56,26 @@ public class Material {
 	public void setValorDeRevenda(double valorDeRevenda) {
 		this.valorDeRevenda = valorDeRevenda;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id_material ^ (id_material >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Material other = (Material) obj;
+		if (id_material != other.id_material)
+			return false;
+		return true;
+	}
 	
 	
 

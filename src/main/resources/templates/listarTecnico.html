@@ -1,68 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-<title>Listagem de Técnicos</title>
-</head>
-<body>
-	<div class="container">
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Confirmação de Exclusão</h4>
-					</div>
-					<div class="modal-body">
-						<p>Tem Certeza que deseja bloquear esse técnico?</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Sim</button>
-						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> <!-- Brand/logo -->
-	<a class="navbar-brand" href="#"><img src="templates/logoBsb.jpg"
-		alt="" height="40" width="40" /></a> <!-- Links -->
-	<ul class="navbar-nav">
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Técnicos</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Funcionário</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Empresas</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Clientes de Empresas</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Materiais</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Tipos de Serviço</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Gerar Nova
-				RAT</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Pagar/Receber</a>
-		</li>
-
-	</ul>
-	</nav>
-
+<th:block layout:fragment="conteudo">
 	<div class="container">
 		<h2>Listagem de Técnico</h2>
 		<p></p>
@@ -84,12 +27,12 @@
 						th:text="${tecnico.bloqueado eq true?'Bloqueado':'Desbloqueado'}"></td>
 					<td><a
 						class="btn btn-small btn-primary glyphicon glyphicon-pencil"
-						th:href="@{/{id}(id=${tecnico.idTecnico})}"> Editar </a>
+						th:href="@{editTecnico/{id}(id=${tecnico.idTecnico})}"> Editar </a>
 						<form th:action="@{deletarTecnico/{id}(id=${tecnico.idTecnico})}"
-							th:method="put" style="display: inline-block;">
+							th:method="put" style="display: inline-block;" method="put" class="frmDelete">
 							<button type="submit"
 								class="btn btn-small btn-success glyphicon glyphicon-trash"
-								th:if="${tecnico.bloqueado eq true}">desbloquear</button>
+								th:if="${tecnico.bloqueado eq true}" >desbloquear</button>
 							<button type="submit"
 								class="btn btn-small btn-danger glyphicon glyphicon-trash"
 								th:if="${tecnico.bloqueado eq false}">Bloquear</button>
@@ -99,5 +42,5 @@
 			</tbody>
 		</table>
 	</div>
-</body>
+</th:block>
 </html>

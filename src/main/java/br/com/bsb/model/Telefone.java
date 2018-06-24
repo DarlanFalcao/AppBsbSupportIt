@@ -80,6 +80,35 @@ public class Telefone {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idTecnico == null) ? 0 : idTecnico.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Telefone other = (Telefone) obj;
+		if (idTecnico == null) {
+			if (other.idTecnico != null)
+				return false;
+		} else if (!idTecnico.equals(other.idTecnico))
+			return false;
+		return true;
+	}
 	
 	
 	

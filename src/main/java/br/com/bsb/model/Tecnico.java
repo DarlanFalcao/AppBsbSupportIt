@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,7 +56,7 @@ public class Tecnico {
 	private transient String dataTemp;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="idTecnico" )
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="idTecnico", fetch = FetchType.EAGER)
 	private List<Telefone> telefone;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -265,6 +266,34 @@ public class Tecnico {
 
 	public void setDataTemp(String dataTemp) {
 		this.dataTemp = dataTemp;
+	}
+
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (idTecnico ^ (idTecnico >>> 32));
+		return result;
+	}
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tecnico other = (Tecnico) obj;
+		if (idTecnico != other.idTecnico)
+			return false;
+		return true;
 	}
 	
 	

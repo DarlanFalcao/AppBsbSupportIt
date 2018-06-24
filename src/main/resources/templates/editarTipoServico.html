@@ -1,34 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<title>Cadastro de Tipo de Serviço</title>
-</head>
-<body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> <!-- Brand/logo -->
-	<a class="navbar-brand" href="#"><img src="logoBsb.jpg" alt=""
-		height="50" width="50" /></a> <!-- Links -->
-	<ul class="navbar-nav">
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Técnicos</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Cadastro de
-				Admin</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Gerar OS</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Pagar/Receber</a>
-		</li>
-	</ul>
-	</nav>
+	xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
 
+<th:block layout:fragment="conteudo">
 	<form action=""
 		th:action="@{/salvarEdicaoTipoServico/{id}(id=${tipoServico.id})}"
 		th:object="${tipoServico}" th:method="PUT" method="post">
@@ -57,5 +34,5 @@
 		<button type="submit" class="btn btn-success">Salvar</button>
 	</form>
 
-</body>
+</th:block>
 </html>

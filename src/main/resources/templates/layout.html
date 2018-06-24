@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+
+<link rel="stylesheet"
+	th:href="@{/css/bootstrap-datepicker.standalone.min.css}" />
+	<link rel="shortcut icon" th:href="@{/images/bsbIcon.png}"/>
+<title>Bsb Support</title>
+</head>
+<body>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" />
+		<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.pt-BR.min.js}"></script>
+<script th:src="@{/js/jquery.mask.min.js}"></script>
+<script th:src="@{/js/bsbSupport.js}"></script>
+<script th:src="@{/js/bsbSupport.exclusaodialogo.js}"></script>
+<script th:src="@{/js/maskaraCnpjCpfRg.js}"></script>
+<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
+<script th:src="@{/js/sweetalert.min.js}"></script>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> <!-- Brand -->
+	<img class="navbar-brand" src="/layout/images/logoBsb.jpg" height="50"
+		width="50"></img> <!-- Links -->
+	<ul class="navbar-nav">
+		<!-- Dropdown -->
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+			href="#" id="navbardrop" data-toggle="dropdown"> Cadastros </a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" th:href="cadastroTecnico">Técnicos</a> <a
+					class="dropdown-item" th:href="cadastroFuncionario">Funcionários</a> <a
+					class="dropdown-item" th:href="cadastroCliente">Clientes</a> <a
+					class="dropdown-item" th:href="cadastroSubEmpresa">Clientes Terceirizados</a> <a
+					class="dropdown-item" th:href="cadastroMaterial">Materiais</a> <a
+					class="dropdown-item" th:href="cadastroConta">Contas</a> <a class="dropdown-item"
+					href="cadastroTipoServico">Tipo de Serviço</a>
+			</div></li>
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+			href="#" id="navbardrop" data-toggle="dropdown"> Listar </a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" th:href="listarTecnicos">Técnicos</a> <a
+					class="dropdown-item" th:href="listarFuncionarios">Funcionários</a> <a
+					class="dropdown-item" th:href="listarClientes">Clientes</a> <a
+					class="dropdown-item" th:href="listarSubEmpresas">Clientes Terceirizados</a> <a
+					class="dropdown-item" th:href="listarMateriais">Materiais</a> <a
+					class="dropdown-item" th:href="listarContas">Contas</a> <a class="dropdown-item"
+					href="listarTipoServicos">Tipo de Serviço</a>
+			</div></li>
+		<li class="nav-item"><a class="nav-link" th:href="cadastroRat">Nova Rat</a></li>
+		<li class="nav-item"><a class="nav-link" href="#">Pagar/Receber</a>
+		</li>
+	</ul>
+	</nav>
+
+	<th:block layout:fragment="conteudo"></th:block>
+
+</body>
+</html>
